@@ -8,11 +8,11 @@ def check(x):
     
 l , r = 0 , max(w,h)*n
 
-while l < r:
+while l + 1 < r:
     md = (l + r) // 2 
 
     if check(md):
         r = md
     else:
-        l = md+1
+        l = md
 print(r)
