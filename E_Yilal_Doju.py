@@ -1,50 +1,45 @@
-from collections import defaultdict
+import math
 
-def calculate_ta(h, l):
-    t1 = max(h , l)
-    t2 = min(h, l)
-    ta = 0
-    while t1 > (t2 // 2):
-        t1 -= 2
-        t2 -= 1
-        ta += 1
-    ta += t2 // 2
-    return ta
+N = int(input())
+arr = list(map(int, input().split()))
 
-n = int(input())
-arr = list(map(int , input().split()))
-ind = defaultdict(int)
-ans = float("inf")
+def smallest(arr):
+    i = j = float('inf')
+    for num in arr:
+        if num < i:
+            j = i
+            i = num
+        elif num < j:
+            j = num
 
-for i in range(0 ,n-2):
-    ta = calculate_ta(arr[i], arr[i+1])
-    ans = min(ta , ans)
-    ta = calculate_ta(arr[i], arr[i+2])
-    ans = min(ta , ans)
-    ta = calculate_ta(arr[i+1], arr[i+2])
-    ans = min(ta , ans)
+    return i, j
 
+a, b = smallest(arr)
+cost = math.ceil(a / 2) + (math.ceil(b / 2))
 
-t1 = max(arr[0] , arr[1])
-t2 = min(arr[0] , arr[1])
-ta = calculate_ta(t1, t2)
-ans = min(ta , ans)
+def do(a, b):
+    if math.ceil(b / 2) >= a:
+        return math.ceil(b / 2)
+    
+    x = math.ceil((2*a - b) / 3)
+    return x + abs(math.ceil((b - x) / 2))
 
-t1 = max(arr[-1] , arr[-2])
-t2 = min(arr[-1] , arr[-2])
-ta = calculate_ta(t1, t2)
-ans = min(ta , ans)
-arr.sort()
-t1 = arr[0]
-t2 = arr[1]
+def check(idx):
+    l_m = m_r = l_r = float("inf")
+    
+    if idx - 1 >= 0:
+        l_m = do(arr[idx], arr[idx - 1])
+    
+    if idx + 1 < N:
+        m_r = do(arr[idx], arr[idx + 1])
+        
+    if idx - 1 >= 0 and idx + 1 < N:
+        a, b = sorted([arr[idx - 1], arr[idx + 1]])
+        l_r = a + math.ceil((b - a) / 2)
+        
+    return min(l_m, m_r, l_r)
 
-ta = 0 
+for idx, num in enumerate(arr):
+    cost = min(cost, check(idx))
 
-ta += t1 //2 
-ta += t2 // 2
-ta += t1 % 2
-ta += t2 % 2
-
-ans = min(ta , ans)
-
-print(ans)
+print(cost)
