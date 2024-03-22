@@ -4,10 +4,10 @@ ip = lambda: int(sys.stdin.readline().strip()); lip = lambda: list(map(int, sys.
 
 n , c = tip()
 
-cities = [0] *(n+ 1)
+cities = [-1] *(n+ 1)
 
 for i in range(c):
-    arr =[0] + lip()
+    arr =[-1] + lip()
     b =  0
 
     for j in range(n+1):
@@ -17,7 +17,7 @@ for i in range(c):
 
     cities[b] += 1 
 
-mx =  0 
+mx =  0
 
 for v in range(n+1):
     if cities[v] > cities[mx] :
