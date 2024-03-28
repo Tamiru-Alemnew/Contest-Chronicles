@@ -2,32 +2,28 @@ import sys; from collections import Counter, defaultdict, deque; from bisect imp
 ip = lambda: int(sys.stdin.readline().strip()); lip = lambda: list(map(int, sys.stdin.readline().strip().split())); tip = lambda: tuple(map(int, sys.stdin.readline().strip().split())); lcp = lambda: sys.stdin.readline().strip().split(); lsip = lambda: list(map(int, sys.stdin.readline().strip())); cip = lambda: list(sys.stdin.readline().strip()); sip = lambda: sys.stdin.readline().strip() ;even = lambda x: x & 1 == 0
 
 
-def HowMuch(x):
-    res = 0
-    while x % 2 == 0:
-        res += 1
-        x //= 2
-    return res
-
 for _ in range(ip()):
     n = ip()
-    a = lip()
-     
-    s = 0 
-    k = []
+    check  = []
+
     for i in range(n):
-        s += HowMuch(a[i])
-        k.append(HowMuch(i+1))
+        check.append(tip()) 
 
-    k.sort(reverse=True)
-    i = 0
-    while i < n and s < n:
-        s += k[i]
-        i += 1
-    
-    if s >= n:
-        print(i)
+    if check[0][0] < check[0][1]:
+        print("NO")
+        continue
+    for i in range(1,n):
+        a , b = check[i - 1]
+        c , d = check[i]
 
+        if c < a or d < b or c < d or c - a < d - b :
+            print("NO")
+            break
     else:
-        print(-1)
+        print("YES")
+
+        
+
+
+
 
