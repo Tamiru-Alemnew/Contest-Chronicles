@@ -21,7 +21,6 @@ for i in range(2,n+1):
 
     ans += len(fac) == 2
 
-print(math.gcd(32 , 28 , 6, 4 , 2))
 print(ans)
 
 
