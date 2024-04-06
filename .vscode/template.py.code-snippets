@@ -1,0 +1,125 @@
+{
+	// Place your Codeforce workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	"input Template": {
+		"scope": "python",
+		"prefix": "template",
+		"body": [
+			"import sys; from collections import Counter, defaultdict, deque; from bisect import bisect_right , bisect_left ; from math import inf; from math import ceil ; import math; " ,
+			"ip = lambda: int(sys.stdin.readline().strip()); lip = lambda: list(map(int, sys.stdin.readline().strip().split())); tip = lambda: tuple(map(int, sys.stdin.readline().strip().split())); lcp = lambda: sys.stdin.readline().strip().split(); lsip = lambda: list(map(int, sys.stdin.readline().strip())); cip = lambda: list(sys.stdin.readline().strip()); sip = lambda: sys.stdin.readline().strip() ;even = lambda x: x & 1 == 0",
+		],
+		"description": "template for contests"
+	},
+
+	"inbound":{
+		"scope": "python",
+		"prefix": "inbound",
+		"body": [
+			"def inbound(row , col):",
+			"    return (0<= row < len(grid)) and (0<= col < len(grid[0]))",
+		],
+	} ,
+	"recursion":{
+		"scope": "python",
+		"prefix": "recursion",
+		"body": [
+			"import threading",
+			"from sys import stdin, stdout, setrecursionlimit",
+			"from collections import defaultdict",
+
+			"setrecursionlimit(1 << 30)",
+			"threading.stack_size(1 << 27)",
+
+			"def main():",
+			"    # Enter your code here",
+			"    pass",
+
+			"main_thread = threading.Thread(target=main)",
+			"main_thread.start()",
+			"main_thread.join()",
+		],
+	} ,
+	"directions":{
+		"scope": "python",
+		"prefix": "directions",
+		"body": [
+			"directions = [(1 , 0 ) , (0 , 1) , (-1 , 0) , (0 , -1) , (1 , -1) , (-1 , 1) , (1 , 1) , (-1 , -1)]",
+		],
+	} ,
+
+	"bfs":{
+		"scope": "python",
+		"prefix": "bfs grid",
+		"body": [
+			"def bfs(row , col):",
+			"   visited = [[False for _ in range(len(grid[0]))] for _ in range(len(grid))]",
+			"    q = deque([(row , col)])",
+			"    visited[row][col] = True",
+			"    while q:",
+			"        for _ in range(len(q)):",
+			"            row , col = q.popleft()",
+			"            for dr , dc in directions:",
+			"                newRow , newCol = row + dr , col + dc",
+			"                if inbound(newRow , newCol) and not visited[newRow][newCol]:",
+			"                    q.append((newRow , newCol))",
+			"                    visited[newRow][newCol] = True",
+		],
+	} ,
+"dfs grid" :{
+	"scope": "python",
+	"prefix": "dfs grid",
+	"body": [
+		"def dfs(row , col):",
+		"    if not inbound(row , col) or visited[row][col]:",
+		"        return",
+		"    visited[row][col] = True",
+		"    for dr , dc in directions:",
+		"        newRow , newCol = row + dr , col + dc",
+		"        dfs(newRow , newCol)",
+	],
+} ,
+"dfs graph" :{
+	"scope": "python",
+	"prefix": "dfs",
+	"body": [
+		"def dfs(node):",
+		"    if visited[node]:",
+		"        return",
+		"    visited[node] = True",
+		"    for neighbor in graph[node]:",
+		"        dfs(neighbor)",
+	],
+} ,
+// dfs iteration graph (not grid)
+"dfs iterative":{
+	"scope": "python",
+	"prefix": "dfs iter" ,
+	"body":[
+        "stk = [src]",
+        "vis = set([src])",
+        "while stk:",
+        "   node = stk.pop()",
+        "if node == dest:",
+        "    return True",
+        "for nbr in graph[node]:",
+        "    if nbr not in vis:",
+        "        stk.append(nbr)",
+        "        vis.add(nbr)",
+	]
+}
+
