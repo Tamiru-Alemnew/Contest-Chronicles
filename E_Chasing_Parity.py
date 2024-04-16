@@ -30,3 +30,5 @@ while q:
     # print(dis)
 
 print(*dis)
+
+
