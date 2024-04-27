@@ -17,8 +17,7 @@ for i in range(q):
     if f == 2:
         if arr[s-1] in min_heap:
             print("YES")
-
         else:
             print("NO")
 
-            
+        
