@@ -1,18 +1,44 @@
-import sys; from collections import Counter, defaultdict, deque; from bisect import bisect_right , bisect_left ; from math import inf; from math import ceil ; import math;from heapq import *;ip = lambda: int(sys.stdin.readline().strip()); lip = lambda: list(map(int, sys.stdin.readline().strip().split())); tip = lambda: tuple(map(int, sys.stdin.readline().strip().split())); lcp = lambda: sys.stdin.readline().strip().split(); lsip = lambda: list(map(int, sys.stdin.readline().strip())); cip = lambda: list(sys.stdin.readline().strip()); sip = lambda: sys.stdin.readline().strip() ;even = lambda x: x & 1 == 0
-
-for _ in range(ip()):
-    n = ip()
-    arr =["Tamiru"] + lip()
-    color = ["Alemnew"] + cip()
-    tree = [["Abebe"] ,["hhh"]] +[[0 , 0] for _ in range(n)]
-
-    for i in range(2 , n):
-        if tree[arr[i]][0] == 0:
-            tree[i][0] = i 
+import sys, threading
+ 
+input = lambda: sys.stdin.readline().strip()
+ 
+def main():
+    for _ in range(int(input())):
+        n = int(input())
+        arr = list(map(int, input().split()))
+        graph = [ [] for _ in range(n)]
+        colors = input()
+ 
+        for i in range(len(arr)):
+            graph[arr[i] - 1].append(i + 1)
         
-        else:
-            tree[i][1] = i
-
-    print(tree)
-
-
+        
+        def dfs(idx):
+            nonlocal ans
+            
+            white = colors[idx] == "W"
+            black = colors[idx] == "B"
+            for ed in graph[idx]:
+                w, b = dfs(ed)
+                white += w
+                black += b
+            
+            if white == black:
+                ans += 1
+ 
+            return white, black
+ 
+        ans = 0
+        dfs(0)
+        print(ans)
+    
+    pass
+    
+if __name__ == '__main__':
+    
+    sys.setrecursionlimit(1 << 30)
+    threading.stack_size(1 << 27)
+ 
+    main_thread = threading.Thread(target=main)
+    main_thread.start()
+    main_thread.join()
