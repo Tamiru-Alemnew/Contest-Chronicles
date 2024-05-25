@@ -164,7 +164,38 @@
         "        p += 1",
         "    return [p for p in range(2, n+1) if is_prime[p]]"
     ]
-}
+},
+// trie without using class
+
+"trie" :{
+	"scope": "python",
+	"prefix": "trie",
+	"body": [
+		"def insert(word):",
+		"    node = trie",
+		"    for char in word:",
+		"        if char not in node:",
+		"            node[char] = {}",
+		"        node = node[char]",
+		"    node['#'] = True",
+		"def search(word):",
+		"    node = trie",
+		"    for char in word:",
+		"        if char not in node:",
+		"            return False",
+		"        node = node[char]",
+		"    return '#' in node",
+		"def startsWith(prefix):",
+		"    node = trie",
+		"    for char in prefix:",
+		"        if char not in node:",
+		"            return False",
+		"        node = node[char]",
+		"    return True"
+
+	]
+},
+
 
 }
 
