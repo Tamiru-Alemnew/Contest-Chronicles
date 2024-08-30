@@ -1,0 +1,1 @@
+{"name":"Local: test","url":"/home/tamiru/Desktop/Codeforce/test.py","tests":[{"id":1723876439536,"input":"3 3\n3 3\n1 2 3\n3 4 5","output":"YES"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/tamiru/Desktop/Codeforce/test.py","group":"local","local":true}

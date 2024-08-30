@@ -196,9 +196,35 @@
 	]
 },
 
-
+"bipartite": {
+    "prefix": "bipartite",
+    "body": [
+        "from collections import deque",
+        "",
+        "def is_bipartite(graph, n):",
+        "    colors = [-1] * n",
+        "",
+        "    for start in range(n):",
+        "        if colors[start] == -1:",  
+        "            queue = deque([start])",
+        "            colors[start] = 1",
+        "",
+        "            while queue:",
+        "                node = queue.popleft()",
+        "",
+        "                for neighbor in graph[node]:",
+        "",
+        "                    if colors[neighbor] == -1:",  
+        "                        colors[neighbor] = 1 if colors[node] == 2 else 2",
+        "                        queue.append(neighbor)",
+        "                    elif colors[neighbor] == colors[node]:",  
+        "                        return False, colors",  
+        "",
+        "    return True, colors"
+    ],
+    "description": "Check if a graph is bipartite"
 }
-
+}
 
 
 
