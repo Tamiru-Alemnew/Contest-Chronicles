@@ -1,32 +1,37 @@
 import sys; from collections import Counter, defaultdict, deque; from bisect import bisect_right , bisect_left ; from math import inf; from math import ceil ; import math;from heapq import *;ip = lambda: int(sys.stdin.readline().strip()); lip = lambda: list(map(int, sys.stdin.readline().strip().split())); tip = lambda: tuple(map(int, sys.stdin.readline().strip().split())); lcp = lambda: sys.stdin.readline().strip().split(); lsip = lambda: list(map(int, sys.stdin.readline().strip())); cip = lambda: list(sys.stdin.readline().strip()); sip = lambda: sys.stdin.readline().strip() ;even = lambda x: x & 1 == 0;
 
-n = ip()
-""""
-dp = 
-[
-  [1.0, 0.0, 0.0, 0.0],  # i = 0 (0 coins)
-  [0.0, 0.0, 0.0, 0.0],  # i = 1 (1 coin)
-  [0.0, 0.0, 0.0, 0.0],  # i = 2 (2 coins)
-  [0.0, 0.0, 0.0, 0.0]   # i = 3 (3 coins)
-]
+mod = 10**9 + 7
 
-"""
-arr = list(map(float , input().split()))
+def mod_inverse(a, m):
+    return pow(a, m - 2, m)
 
-prev = [ 0 for i in range(n+1)]  
 
-prev[0] = 1
+t = ip()
 
-for i in range(1 , n+1):
-    current = [0]*(n+1)
+results = []
 
-    for j in range(i+1):
-        if j >= 1:
-            current[j] += prev[j-1] * arr[i-1]
+for _ in range(t):
+    n = ip()  
+    arr = lip() 
+    
+    ps = [0] * n
+    ps[0] = arr[0]
 
-        current[j] += prev[j] * (1-arr[i-1])
+    for i in range(1, n):
+        ps[i] = ps[i - 1] + arr[i]
 
-    prev = current[:]
+    total = 0
 
-print(sum(current[n//2+1:]))
+    for i in range(n):
+        total += arr[i] * (ps[-1] - ps[i])
+        total %= mod
 
+    Q = (n * (n - 1) // 2) % mod
+
+    P = total % mod
+    Q_inv = mod_inverse(Q, mod)
+    
+    answer = (P * Q_inv) % mod
+    results.append(answer)
+
+print("\n".join(map(str, results)))

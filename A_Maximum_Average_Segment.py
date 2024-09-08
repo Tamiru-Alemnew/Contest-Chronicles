@@ -1,32 +1,41 @@
 import sys; from collections import Counter, defaultdict, deque; from bisect import bisect_right , bisect_left ; from math import inf; from math import ceil ; import math;from heapq import *;ip = lambda: int(sys.stdin.readline().strip()); lip = lambda: list(map(int, sys.stdin.readline().strip().split())); tip = lambda: tuple(map(int, sys.stdin.readline().strip().split())); lcp = lambda: sys.stdin.readline().strip().split(); lsip = lambda: list(map(int, sys.stdin.readline().strip())); cip = lambda: list(sys.stdin.readline().strip()); sip = lambda: sys.stdin.readline().strip() ;even = lambda x: x & 1 == 0;
 
-n = ip()
-""""
-dp = 
-[
-  [1.0, 0.0, 0.0, 0.0],  # i = 0 (0 coins)
-  [0.0, 0.0, 0.0, 0.0],  # i = 1 (1 coin)
-  [0.0, 0.0, 0.0, 0.0],  # i = 2 (2 coins)
-  [0.0, 0.0, 0.0, 0.0]   # i = 3 (3 coins)
-]
-
+n , d = tip()
+arr = lip()
 """
-arr = list(map(float , input().split()))
+[-5e+17, -1e+18, -1.5e+18, -2e+18, -2.5e+18, -3e+18, -3.5e+18]
+"""
+def check(x):
+    ps =[0]*(n+1)
+    for i in range(n):
+        ps[i+1] = ps[i] + arr[i] 
 
-prev = [ 0 for i in range(n+1)]  
+    l = 0 
+    for r in range(d , n + 1):
+        if ps[r-d]- ((r-d) * x) < ps[l] - l*x:
+            l = r-d
 
-prev[0] = 1
+        if ps[l] - l*x <= ps[r] - r*x:
+            return l+1 , r
+        
+    return -1 , -1
 
-for i in range(1 , n+1):
-    current = [0]*(n+1)
 
-    for j in range(i+1):
-        if j >= 1:
-            current[j] += prev[j-1] * arr[i-1]
+l , r = 0 , 10**18
 
-        current[j] += prev[j] * (1-arr[i-1])
+ans = [0,0]
 
-    prev = current[:]
+while r - l >= 0.0000006:
 
-print(sum(current[n//2+1:]))
+    md = (l + r) / 2
 
+    ll , rr = check(md)
+
+    if ll != -1 :
+        ans = [ll , rr]
+        l = md 
+
+    else:
+        r = md 
+
+print(*ans)

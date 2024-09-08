@@ -1,32 +1,31 @@
 import sys; from collections import Counter, defaultdict, deque; from bisect import bisect_right , bisect_left ; from math import inf; from math import ceil ; import math;from heapq import *;ip = lambda: int(sys.stdin.readline().strip()); lip = lambda: list(map(int, sys.stdin.readline().strip().split())); tip = lambda: tuple(map(int, sys.stdin.readline().strip().split())); lcp = lambda: sys.stdin.readline().strip().split(); lsip = lambda: list(map(int, sys.stdin.readline().strip())); cip = lambda: list(sys.stdin.readline().strip()); sip = lambda: sys.stdin.readline().strip() ;even = lambda x: x & 1 == 0;
+n , k = tip()
 
-n = ip()
-""""
-dp = 
-[
-  [1.0, 0.0, 0.0, 0.0],  # i = 0 (0 coins)
-  [0.0, 0.0, 0.0, 0.0],  # i = 1 (1 coin)
-  [0.0, 0.0, 0.0, 0.0],  # i = 2 (2 coins)
-  [0.0, 0.0, 0.0, 0.0]   # i = 3 (3 coins)
-]
+arr = lip()
 
-"""
-arr = list(map(float , input().split()))
+def check(n):
+    prev = arr[0]
+    count = 0 
 
-prev = [ 0 for i in range(n+1)]  
+    for a in arr:
+        if a - prev >= n :
+            count += 1
+            prev = a 
 
-prev[0] = 1
+    return count >= k -1
 
-for i in range(1 , n+1):
-    current = [0]*(n+1)
+l , r = 0 , 10**18
 
-    for j in range(i+1):
-        if j >= 1:
-            current[j] += prev[j-1] * arr[i-1]
+ans = 0
 
-        current[j] += prev[j] * (1-arr[i-1])
+while l <= r:
 
-    prev = current[:]
+    md = (l + r) // 2
 
-print(sum(current[n//2+1:]))
+    if check(md):
+        ans = md 
+        l = md + 1
+    else:
+        r = md  - 1
 
+print(ans)
