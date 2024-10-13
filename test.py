@@ -1,15 +1,15 @@
-import sys; from collections import Counter, defaultdict, deque; from bisect import bisect_right , bisect_left ; from math import inf; from math import ceil ; import math;from heapq import *;ip = lambda: int(sys.stdin.readline().strip()); lip = lambda: list(map(int, sys.stdin.readline().strip().split())); tip = lambda: tuple(map(int, sys.stdin.readline().strip().split())); lcp = lambda: sys.stdin.readline().strip().split(); lsip = lambda: list(map(int, sys.stdin.readline().strip())); cip = lambda: list(sys.stdin.readline().strip()); sip = lambda: sys.stdin.readline().strip() ;even = lambda x: x & 1 == 0;
+s = input()
+n = len(s)
+dp = [[0] * (n + 1) for _ in range(n + 1)]
 
-na , nb = tip()
+for i in range(n + 1):
+	for j in range(n - i):
+		dp[j][i + j] = dp[j + 1][i + j] + 1
+		for k in range(j + 1, i + j + 1):
+			if s[k] == s[j]:
+				dp[j][i + j] = min(dp[j][i + j], dp[j + 1][k - 1] + dp[k + 1][i + j])
+	for d in dp:
+		print(d)
+	print(i)
 
-k , m = tip()
-A =  lip()
-B = lip()
-
-if A[k-1] < B[nb-m]:
-    print("YES")
-
-else:
-    print("NO")
-
-
+print(dp[0][n - 1])
