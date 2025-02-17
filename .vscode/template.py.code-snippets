@@ -1,21 +1,4 @@
 {
-	// Place your Codeforce workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
-	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
-	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
-	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
-	// Placeholders with the same ids are connected.
-	// Example:
-	// "Print to console": {
-	// 	"scope": "javascript,typescript",
-	// 	"prefix": "log",
-	// 	"body": [
-	// 		"console.log('$1');",
-	// 		"$2"
-	// 	],
-	// 	"description": "Log output to console"
-	// }
-
 	"input Template": {
 		"scope": "python",
 		"prefix": "template",
@@ -121,7 +104,6 @@
         "        vis.add(nbr)",
 	],
 },
-// union find set
 
 "union find":{
 	"scope": "python",
@@ -149,7 +131,7 @@
 		"            self.rank[parent2] += 1",
 	],
 } ,
-// seive 
+
 "seive" :{
     "scope": "python",
     "prefix": "seive",
@@ -165,7 +147,6 @@
         "    return [p for p in range(2, n+1) if is_prime[p]]"
     ]
 },
-// trie without using class
 
 "trie" :{
 	"scope": "python",
@@ -223,8 +204,51 @@
         "    return True, colors"
     ],
     "description": "Check if a graph is bipartite"
+},
+
+"KMP Algorithm": {
+	"prefix": "kmp",
+	"body": [
+		"def build_lps(pattern):",
+		"    lps = [0] * len(pattern)",
+		"    length = 0  # Length of previous longest prefix suffix",
+		"    i = 1",
+		"",
+		"    while i < len(pattern):",
+		"        if pattern[i] == pattern[length]:",
+		"            length += 1",
+		"            lps[i] = length",
+		"            i += 1",
+		"        else:",
+		"            if length != 0:",
+		"                length = lps[length - 1]",
+		"            else:",
+		"                lps[i] = 0",
+		"                i += 1",
+		"    return lps",
+		"",
+		"def kmp_search(text, pattern):",
+		"    lps = build_lps(pattern)",
+		"    i = j = 0  # i for text, j for pattern",
+		"    occurrences = []",
+		"",
+		"    while i < len(text):",
+		"        if text[i] == pattern[j]:",
+		"            i += 1",
+		"            j += 1",
+		"",
+		"        if j == len(pattern):",
+		"            occurrences.append(i - j)",
+		"            j = lps[j - 1]",
+		"",
+		"        elif i < len(text) and text[i] != pattern[j]:",
+		"            if j != 0:",
+		"                j = lps[j - 1]",
+		"            else:",
+		"                i += 1",
+		"    return occurrences"
+	],
+	"description": "KMP (Knuth-Morris-Pratt) algorithm for pattern searching"
 }
 }
-
-
 
